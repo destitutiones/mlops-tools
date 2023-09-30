@@ -1,17 +1,18 @@
+import os
+import sys
+
 import numpy as np
 import pandas as pd
 from sklearn import datasets
 
-import os
-import sys
 
 example_dir = os.path.dirname(os.path.realpath(__file__))
 sys.path.append(os.path.dirname(example_dir))
-from mlops_tools.models import LinReg
+from mlops_tools.models import LinReg  # noqa: E402
 
 
 def main():
-    reg = LinReg('basic_lin_reg')
+    reg = LinReg("basic_lin_reg")
     # Load the diabetes dataset
     diabetes_X, diabetes_y = datasets.load_diabetes(return_X_y=True)
 
@@ -32,5 +33,5 @@ def main():
     print(pd.DataFrame(metrics))
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
