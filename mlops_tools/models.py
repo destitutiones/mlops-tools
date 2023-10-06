@@ -70,6 +70,3 @@ class LinReg:
         plt.yticks(())
 
         plt.show()
-
-    def test_func(self) -> int:
-        return 0
