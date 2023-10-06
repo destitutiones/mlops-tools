@@ -9,8 +9,8 @@ from sklearn.metrics import mean_squared_error, r2_score
 class LinReg:
     """
     Linear Regression model implementation.
-    Source: https://scikit-learn.org/stable/
-        auto_examples/linear_model/plot_ols.html
+    Source:
+    https://scikit-learn.org/stable/auto_examples/linear_model/plot_ols.html
     (No one has told it should be at least a bit intellectual)
     """
 
