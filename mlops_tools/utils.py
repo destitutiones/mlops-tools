@@ -3,7 +3,7 @@ import sys
 from typing import Tuple
 
 import pandas as pd
-from sklearn import datasets
+from dvc.api import DVCFileSystem
 from sklearn.model_selection import train_test_split
 
 
@@ -23,7 +23,12 @@ def prepare_dataset(test_size: float, path: str = "./") -> None:
     assert 0 < test_size < 1, "Test share should be between 0.0 and 1.0"
 
     # Load the diabetes dataset
-    diabetes_X, diabetes_y = datasets.load_diabetes(return_X_y=True, as_frame=True)
+    url = "https://github.com/destitutiones/mlops-tools.git"
+    fs = DVCFileSystem(url, rev="main")
+    fs.get("data", "data", recursive=True)
+
+    diabetes_X = pd.read_csv("./data/diabetes_X.csv")
+    diabetes_y = pd.read_csv("./data/diabetes_y.csv")
     # Split the data & targets into training/testing sets
     X_train, X_test, y_train, y_test = train_test_split(
         diabetes_X, diabetes_y, test_size=test_size, random_state=42
