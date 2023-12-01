@@ -35,6 +35,10 @@ jobs:
         run: poetry install --no-interaction --no-root
 
       - name: Run train.py
-        run: python mlops_tools/train.py
+        run: |
+          source .venv/bin/activate
+          python mlops_tools/train.py
       - name: Run infer.py
-        run: python mlops_tools/infer.py
+        run: |
+          source .venv/bin/activate
+          python mlops_tools/infer.py
