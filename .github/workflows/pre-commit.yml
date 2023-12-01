@@ -1,4 +1,4 @@
-name: pre-commit-test
+name: pre-commit
 
 on:
   push:

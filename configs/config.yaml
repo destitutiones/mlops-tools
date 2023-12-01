@@ -1,0 +1,4 @@
+model:
+  name: basic_lin_reg
+  fit_intercept: true
+  n_jobs: 10

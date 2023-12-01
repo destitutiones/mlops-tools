@@ -1,0 +1,7 @@
+defaults:
+  - base_diabetes
+
+name: diabetes
+path: /data
+test_size: 0.2
+seed: 42
