@@ -19,6 +19,12 @@ class Model:
 
 
 @dataclass
+class CommonInfo:
+    repo_url: str
+
+
+@dataclass
 class Params:
     data: Any
     model: Model
+    common: CommonInfo

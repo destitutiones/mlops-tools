@@ -3,3 +3,6 @@ model:
   fit_intercept: true
   n_jobs: 10
   test_size: 0.2
+
+common:
+  repo_url: https://github.com/destitutiones/mlops-tools.git

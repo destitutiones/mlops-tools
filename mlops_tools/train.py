@@ -21,7 +21,7 @@ def main(cfg: Params) -> None:
     model_name = cfg["model"]["name"]
     reg = LinReg(model_name)
     # Prepare & load diabetes datasets
-    prepare_dataset(cfg["model"]["test_size"])
+    prepare_dataset(cfg["common"]["repo_url"], cfg["model"]["test_size"])
     X_train, X_test, y_train, y_test = load_dataset()
 
     # Train model & save it to disk

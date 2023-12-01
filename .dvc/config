@@ -1,5 +1,0 @@
-[core]
-    remote = storage
-['remote "storage"']
-    url = gdrive://1gV7VmII7d_jX9u_dH7zAD0K1gxmmlsj1
-    gdrive_use_service_account = true

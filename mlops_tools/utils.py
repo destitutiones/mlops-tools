@@ -1,5 +1,3 @@
-import os
-import sys
 from typing import Tuple
 
 import pandas as pd
@@ -7,14 +5,11 @@ from dvc.api import DVCFileSystem
 from sklearn.model_selection import train_test_split
 
 
-example_dir = os.path.dirname(os.path.realpath(__file__))
-sys.path.append(os.path.dirname(example_dir))
-
-
-def prepare_dataset(test_size: float, path: str = "./") -> None:
+def prepare_dataset(repo_url: str, test_size: float, path: str = "./") -> None:
     """
     Saves train & test data from sklearn diabetes dataset by mentioned path in csv format.
 
+    :param repo_url: url to the current repository linked to dvc
     :param test_size: should be between 0.0 and 1.0 and represent the proportion of the dataset to include in the test split
     :param path: path to save train & test data
     :return:
@@ -23,8 +18,7 @@ def prepare_dataset(test_size: float, path: str = "./") -> None:
     assert 0 < test_size < 1, "Test share should be between 0.0 and 1.0"
 
     # Load the diabetes dataset
-    url = "https://github.com/destitutiones/mlops-tools.git"
-    fs = DVCFileSystem(url, rev="main")
+    fs = DVCFileSystem(repo_url, rev="main")
     fs.get("data", "data", recursive=True)
 
     diabetes_X = pd.read_csv("./data/diabetes_X.csv")
