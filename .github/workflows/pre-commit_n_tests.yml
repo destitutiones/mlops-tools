@@ -45,7 +45,7 @@ jobs:
 
       - name: Run train.py
         env:
-          GDRIVE_CREDENTIALS_DATA: ${{ secrets.GDRIVE_SERVICE_CREDS }}
+          GDRIVE_CREDENTIALS_DATA: ${{ secrets.GDRIVE_USER_CREDS }}
         run: |
           source .venv/bin/activate
           python mlops_tools/train.py
