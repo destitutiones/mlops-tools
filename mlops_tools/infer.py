@@ -6,7 +6,7 @@ import hydra
 import pandas as pd
 
 
-mlops_tools_dir_path = Path(__file__).absolute().parent
+mlops_tools_dir_path = Path(__file__).absolute().parent.parent
 root_dir_path = mlops_tools_dir_path.parent
 sys.path.append(str(mlops_tools_dir_path))
 sys.path.append(str(root_dir_path.joinpath("configs")))
