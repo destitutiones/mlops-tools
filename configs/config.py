@@ -11,6 +11,13 @@ class DiabetesData:
 
 
 @dataclass
+class CaliforniaHousingData:
+    name: str
+    path: str
+    test_size: float
+
+
+@dataclass
 class Model:
     name: str
     fit_intercept: bool
@@ -21,6 +28,10 @@ class Model:
 @dataclass
 class CommonInfo:
     repo_url: str
+    task: str
+    raw_data_path: str
+    processed_data_path: str
+    mlflow_uri: str
 
 
 @dataclass

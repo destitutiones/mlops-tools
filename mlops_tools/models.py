@@ -2,42 +2,41 @@ from typing import Tuple
 
 import matplotlib.pyplot as plt
 import pandas as pd
-from sklearn import linear_model
+from catboost import CatBoostRegressor
 from sklearn.metrics import mean_squared_error, r2_score
 
 
-class LinReg:
+class CatBoostReg:
     """
-    Linear Regression model implementation.
-    Source:
-    https://scikit-learn.org/stable/auto_examples/linear_model/plot_ols.html
-    (No one has told it should be at least a bit intellectual)
+    CatBoost Regressor model implementation.
     """
 
-    def __init__(self, name: str):
+    def __init__(self, name: str, seed: int):
         """
         :param name: model name
         """
-        self.model = linear_model.LinearRegression()
+        self.model = CatBoostRegressor(silent=True, random_state=seed)
         self.name = name
         self.is_fitted = False
 
-    def fit(self, X_train, y_train) -> None:
+    def fit(self, X_train: pd.DataFrame, y_train: pd.DataFrame) -> None:
         """
         Model training.
 
         :param X_train: Training data.
-        :param y_train: Target values.
+        :param y_train: Target valuese.
         """
         self.model.fit(X_train, y_train)
         self.is_fitted = True
 
-    def calculate_metrics(self, X_test, y_test) -> Tuple[list[float], dict]:
+    def calculate_metrics(
+        self, X_test: pd.DataFrame, y_test: pd.DataFrame
+    ) -> Tuple[list[float], dict]:
         """
         Prediction and metrics calculation.
 
-        :param X_test: Samples to predict values.
-        :param y_test: Target values to evaluate model quality.
+        :param X_test: Samples to predict values, pd.DataFrame.
+        :param y_test: Target values to evaluate model quality, pd.DataFrame.
         :return:
             y_pred – model prediction,
             dict('model_name', 'mse', 'r2_score')
@@ -55,7 +54,9 @@ class LinReg:
         )
         return y_pred, metrics
 
-    def plot_outputs(self, X_test, y_test, y_pred) -> None:
+    def plot_outputs(
+        self, X_test: pd.DataFrame, y_test: pd.DataFrame, y_pred: pd.DataFrame
+    ) -> None:
         """
         Sample and prediction rendering.
 

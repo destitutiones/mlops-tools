@@ -1,8 +1,13 @@
 model:
-  name: basic_lin_reg
+  name: basic_catboost_reg
   fit_intercept: true
   n_jobs: 10
   test_size: 0.2
+  seed: 42
 
 common:
   repo_url: https://github.com/destitutiones/mlops-tools.git
+  data: california_housing
+  raw_data_path: ./data/raw_datasets/
+  processed_data_path: ./data/processed/
+  mlflow_uri: http://127.0.0.1:5000

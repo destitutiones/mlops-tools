@@ -5,10 +5,10 @@ MIPT MLOps course project, autumn 2023
 ## Task
 
 We're solving a regression task using
-[diabetes](https://scikit-learn.org/stable/datasets/toy_dataset.html#diabetes-dataset)
-dataset. Based on the medical indicators of patients (age, gender, body mass
-index, average blood pressure and six measurements in blood serum), we predict a
-quantitative indicator of the progression of diabetes.
+[California housing dataset](https://scikit-learn.org/stable/datasets/real_world.html#california-housing-dataset).
+Based on average number of rooms, bedrooms, household members, house age, etc.
+we're predicting the median house value for California districts, expressed in
+hundreds of dollars.
 
 ## Docs
 

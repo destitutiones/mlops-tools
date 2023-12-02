@@ -1,0 +1,5 @@
+defaults:
+  - base_california_housing
+
+name: california_housing
+test_size: 0.2

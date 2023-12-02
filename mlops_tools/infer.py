@@ -21,7 +21,7 @@ def main(cfg: Params) -> None:
     # Load the model from disk
     reg = pickle.load(open(cfg["model"]["name"] + ".sav", "rb"))
     # Load diabetes datasets
-    X_train, X_test, y_train, y_test = load_dataset()
+    X_train, X_test, y_train, y_test = load_dataset(cfg["common"]["processed_data_path"])
 
     # Calculate metrics
     y_pred, metrics = reg.calculate_metrics(X_test, y_test)
