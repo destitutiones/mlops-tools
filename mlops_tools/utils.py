@@ -2,6 +2,7 @@ import sys
 from pathlib import Path
 from typing import Tuple
 
+import git
 import pandas as pd
 from dvc.api import DVCFileSystem
 from sklearn.model_selection import train_test_split
@@ -64,3 +65,15 @@ def load_dataset(
     y_test = pd.read_csv(processed_data_path + "y_test.csv")
 
     return X_train, X_test, y_train, y_test
+
+
+def get_repo_params() -> Tuple[str, str]:
+    """
+    Get current repo url & current sha.
+    :return: repo_url, sha
+    """
+    repo = git.Repo(search_parent_directories=True)
+    repo_url = repo.remotes[0].config_reader.get("url")
+    sha = repo.head.object.hexsha
+
+    return repo_url, sha

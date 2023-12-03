@@ -49,3 +49,6 @@ To run **hw2** you should:
    (and have the server run).
 2. Set `is_mlflow_logging` parameter `True`.
 3. Run `./examples/hw2.sh` in the console.
+
+**Note:** In case you want to infer a specific saved model, mind the
+`inference_model` parameter.

@@ -1,6 +1,7 @@
 model:
   name: basic_catboost_reg
   test_size: 0.2
+  #  inference_model: mlflow_models/basic_catboost_reg
   params:
     loss_function: RMSE
     custom_metric: [MAE, MAPE, MedianAbsoluteError, R2]
@@ -14,3 +15,4 @@ common:
   processed_data_path: ./data/processed/
   is_mlflow_logging: False
   mlflow_uri: http://127.0.0.1:5000
+  mlflow_models_path: ./mlflow_models/

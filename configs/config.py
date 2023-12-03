@@ -21,6 +21,7 @@ class CaliforniaHousingData:
 class Model:
     name: str
     test_size: float
+    inference_model: str
     params: Any
 
 
