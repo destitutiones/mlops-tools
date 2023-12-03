@@ -1,3 +1,5 @@
+import sys
+from pathlib import Path
 from typing import Tuple
 
 import pandas as pd
@@ -5,19 +7,23 @@ from dvc.api import DVCFileSystem
 from sklearn.model_selection import train_test_split
 
 
-def prepare_dataset(
-    cfg: dict,
-) -> None:  # repo_url: str, test_size: float, path: str = "./") -> None:
+mlops_tools_dir_path = Path(__file__).absolute().parent.parent
+root_dir_path = mlops_tools_dir_path.parent
+sys.path.append(str(mlops_tools_dir_path))
+sys.path.append(str(root_dir_path.joinpath("configs")))
+
+from configs.config import Params  # noqa: E402
+
+
+def prepare_dataset(cfg: Params, repo_url: str) -> None:
     """
     Saves train & test data from sklearn diabetes dataset by mentioned path in csv format.
 
+    :param cfg: Params config from train run
     :param repo_url: url to the current repository linked to dvc
-    :param test_size: should be between 0.0 and 1.0 and represent the proportion of the dataset to include in the test split
-    :param path: path to save train & test data
     :return:
     """
 
-    repo_url = cfg["common"]["repo_url"]
     test_size = cfg["model"]["test_size"]
     raw_data_path = cfg["common"]["raw_data_path"]
     raw_data_path_loaded = raw_data_path + "loaded/"

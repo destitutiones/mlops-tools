@@ -1,12 +1,14 @@
 model:
   name: basic_catboost_reg
-  fit_intercept: true
-  n_jobs: 10
   test_size: 0.2
-  seed: 42
+  params:
+    loss_function: RMSE
+    custom_metric: [MAE, MAPE, MedianAbsoluteError, R2]
+    depth: 8
+    random_seed: 42
+    silent: True
 
 common:
-  repo_url: https://github.com/destitutiones/mlops-tools.git
   data: california_housing
   raw_data_path: ./data/raw_datasets/
   processed_data_path: ./data/processed/

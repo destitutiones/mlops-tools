@@ -20,9 +20,8 @@ class CaliforniaHousingData:
 @dataclass
 class Model:
     name: str
-    fit_intercept: bool
-    n_jobs: int
     test_size: float
+    params: Any
 
 
 @dataclass

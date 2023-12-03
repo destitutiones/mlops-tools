@@ -11,12 +11,13 @@ class CatBoostReg:
     CatBoost Regressor model implementation.
     """
 
-    def __init__(self, name: str, seed: int):
+    def __init__(self, name: str, params: dict) -> None:
         """
         :param name: model name
+        :param params: model parameters
         """
-        self.model = CatBoostRegressor(silent=True, random_state=seed)
         self.name = name
+        self.model = CatBoostRegressor(**params)
         self.is_fitted = False
 
     def fit(self, X_train: pd.DataFrame, y_train: pd.DataFrame) -> None:

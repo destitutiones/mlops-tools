@@ -39,3 +39,12 @@ pre-commit run -a
 python mlops_tools/train.py
 python mlops_tools/infer.py
 ```
+
+#### #3
+
+To run **hw2** you should:
+
+1. Specify `mlflow_uri` parameter in the
+   [config](https://github.com/destitutiones/mlops-tools/blob/main/configs/config.yaml)
+   (and have the server run).
+2. Run `./examples/hw2.sh` in the console.
