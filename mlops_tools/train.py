@@ -27,6 +27,7 @@ def mlflow_logging(model: CatBoostReg, sha: str) -> None:
     :param sha: current git commit id
     """
     mlflow.log_params(model.model.get_params())
+    mlflow.log_param("git commit id", sha)
 
     evals_result = pd.DataFrame(model.model.get_evals_result()["learn"])
     for i, row in evals_result.iterrows():
@@ -42,20 +43,24 @@ def main(cfg: Params) -> None:
 
     model_name = cfg["model"]["name"]
     model_params = cfg["model"]["params"]
+    is_mlflow_logging = cfg["common"]["is_mlflow_logging"]
 
     reg = CatBoostReg(model_name, model_params)
     # Prepare & load diabetes datasets
     prepare_dataset(cfg, repo_url)
     X_train, X_test, y_train, y_test = load_dataset(cfg["common"]["processed_data_path"])
 
-    mlflow.set_tracking_uri(cfg["common"]["mlflow_uri"])
-    mlflow.set_experiment(f"{model_name}_training")
+    if is_mlflow_logging:
+        mlflow.set_tracking_uri(cfg["common"]["mlflow_uri"])
+        mlflow.set_experiment(f"{model_name}_training")
 
-    with mlflow.start_run():
-        # Train model & save it to disk
+        with mlflow.start_run():
+            # Train model & save it to disk
+            reg.fit(X_train, y_train)
+            mlflow_logging(reg, sha)
+    else:
         reg.fit(X_train, y_train)
-        pickle.dump(reg, open(model_name + ".sav", "wb"))
-        mlflow_logging(reg, sha)
+    pickle.dump(reg, open(model_name + ".sav", "wb"))
 
 
 if __name__ == "__main__":

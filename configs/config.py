@@ -30,6 +30,7 @@ class CommonInfo:
     task: str
     raw_data_path: str
     processed_data_path: str
+    is_mlflow_logging: bool
     mlflow_uri: str
 
 
