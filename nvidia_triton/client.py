@@ -15,9 +15,11 @@ sys.path.append(str(root_dir_path.joinpath("configs")))
 from configs.config import Params  # noqa: E402
 
 from mlops_tools.models import CatBoostReg  # noqa: E402
-from mlops_tools.utils import (  # noqa: E402; get_repo_params, load_onnx_model,
+from mlops_tools.utils import (  # noqa: E402
     calculate_metrics,
+    get_repo_params,
     load_dataset,
+    prepare_dataset,
 )
 
 
@@ -50,14 +52,10 @@ def make_predict(onnx_model_name: str, X_test: np.array) -> np.array:
 def main(cfg: Params) -> None:
     model_name = cfg["model"]["onnx_model_name"]
     model_params = cfg["model"]["params"]
-
-    # load_onnx_model(
-    #     cfg["common"]["triton_weights_path"],
-    #     cfg["common"]["triton_weights_target_path"],
-    #     get_repo_params()[0],
-    # )
+    repo_url, sha = get_repo_params()
 
     # triton part
+    prepare_dataset(cfg, repo_url)
     X_train, X_test, y_train, y_test = load_dataset(cfg["common"]["processed_data_path"])
     X_test = X_test.to_numpy(dtype=np.float32)
 

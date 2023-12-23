@@ -43,7 +43,7 @@ def main(cfg: Params) -> None:
     repo_url, sha = get_repo_params()
 
     reg = CatBoostReg(model_name, model_params)
-    # Prepare & load diabetes datasets
+    # Prepare & load datasets
     prepare_dataset(cfg, repo_url)
     X_train, X_test, y_train, y_test = load_dataset(cfg["common"]["processed_data_path"])
 

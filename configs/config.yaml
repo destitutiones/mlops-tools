@@ -2,8 +2,8 @@ model:
   name: basic_catboost_reg
   test_size: 0.2
   #  inference_model: mlflow_models/basic_catboost_reg
-  onnx_model_name: onnx-catboost
-  onnx_model_path: /nvidia-triton/model_repository/onnx-catboost/1/model.onnx
+  onnx_model_name: onnx_catboost
+  onnx_model_path: /nvidia-triton/model_repository/onnx_catboost/1/model.onnx
   params:
     loss_function: RMSE
     custom_metric: [MAE, MAPE, MedianAbsoluteError, R2]
@@ -19,5 +19,3 @@ common:
   mlflow_uri: http://127.0.0.1:5000
   mlflow_models_path: ./mlflow_models/
   triton_path: ./nvidia_triton/
-  triton_weights_path: /nvidia_triton/model_repository/onnx_catboost/1/
-  triton_weights_target_path: ./nvidia_triton/model_repository/onnx_catboost/2/model.onnx

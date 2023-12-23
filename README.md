@@ -57,14 +57,20 @@ To run **hw2** you should:
 
 ### HW3 example run
 
-1. First, run triton server:
+1. First, load weights from dvc:
+
+```bash
+dvc pull
+```
+
+2. Next, run triton server:
 
 ```bash
 cd nvidia_triton/
 docker-compose up
 ```
 
-2. Simultaniously run `client.py`:
+3. Simultaniously run `client.py`:
 
 ```bash
 python3 -m venv mlops_env

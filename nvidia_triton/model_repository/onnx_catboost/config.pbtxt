@@ -1,4 +1,4 @@
-name: "onnx-catboost"
+name: "onnx_catboost"
 platform: "onnxruntime_onnx"
 max_batch_size: 0
 
