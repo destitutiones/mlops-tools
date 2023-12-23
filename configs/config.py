@@ -36,8 +36,7 @@ class CommonInfo:
     is_mlflow_logging: bool
     mlflow_uri: str
     triton_path: str
-    triton_weights_path: str
-    triton_weights_target_path: str
+    deviation_threshold: float
 
 
 @dataclass

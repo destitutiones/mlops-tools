@@ -52,6 +52,7 @@ def make_predict(onnx_model_name: str, X_test: np.array) -> np.array:
 def main(cfg: Params) -> None:
     model_name = cfg["model"]["onnx_model_name"]
     model_params = cfg["model"]["params"]
+    deviation_threshold = cfg["common"]["deviation_threshold"]
     repo_url, sha = get_repo_params()
 
     # triton part
@@ -69,6 +70,14 @@ def main(cfg: Params) -> None:
     _, standard_res = reg.calculate_metrics(X_test, y_test)
 
     print(pd.concat([triton_res, standard_res]))
+
+    # Сравним результаты показаний моделей
+    for col in standard_res.columns:
+        if col != "model_name":
+            assert (
+                np.abs(standard_res.iloc[0][col] - triton_res.iloc[0][col])
+                < deviation_threshold
+            ), f"{col} value differs by more then {deviation_threshold}"
 
 
 if __name__ == "__main__":

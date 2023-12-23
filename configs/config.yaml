@@ -19,3 +19,4 @@ common:
   mlflow_uri: http://127.0.0.1:5000
   mlflow_models_path: ./mlflow_models/
   triton_path: ./nvidia_triton/
+  deviation_threshold: 1e-3
