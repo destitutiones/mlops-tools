@@ -3,8 +3,10 @@ from pathlib import Path
 from typing import Tuple
 
 import git
+import numpy as np
 import pandas as pd
 from dvc.api import DVCFileSystem
+from sklearn.metrics import mean_squared_error, r2_score
 from sklearn.model_selection import train_test_split
 
 
@@ -18,7 +20,7 @@ from configs.config import Params  # noqa: E402
 
 def prepare_dataset(cfg: Params, repo_url: str) -> None:
     """
-    Saves train & test data from sklearn diabetes dataset by mentioned path in csv format.
+    Saves train & test data from sklearn dataset by mentioned path in csv format.
 
     :param cfg: Params config from train run
     :param repo_url: url to the current repository linked to dvc
@@ -33,7 +35,7 @@ def prepare_dataset(cfg: Params, repo_url: str) -> None:
 
     assert 0 < test_size < 1, "Test share should be between 0.0 and 1.0"
 
-    # Load the diabetes dataset
+    # Load the dataset
     fs = DVCFileSystem(repo_url, rev="main")
     fs.get(raw_data_path, raw_data_path_loaded, recursive=True)
 
@@ -77,3 +79,43 @@ def get_repo_params() -> Tuple[str, str]:
     sha = repo.head.object.hexsha
 
     return repo_url, sha
+
+
+def load_onnx_model(dvc_data_path: str, target_data_path: str, repo_url: str) -> None:
+    """
+    Load model weights from dvc
+
+    :param dvc_data_path: path to directory with dvc-files
+    :param target_data_path: path do download onnx-file
+    :param repo_url: url to the current repository with inited dvc storage
+    :return: None
+    """
+
+    # Load the weights
+    fs = DVCFileSystem(repo_url, rev="main")
+    fs.get(dvc_data_path, target_data_path, recursive=True)
+
+
+def calculate_metrics(
+    model_name: str, y_test: np.array, y_pred: np.array
+) -> pd.DataFrame:
+    """
+    Calculate MSE & 2r_score.
+
+    :param model_name: name of the model results evaluated.
+    :param y_test: real y values
+    :param y_pred: predicted y values
+    :return: dataframe with metrics values
+    """
+
+    mse_val = mean_squared_error(y_test, y_pred)
+    r2_score_val = r2_score(y_test, y_pred)
+    metrics = pd.DataFrame(
+        {
+            "model_name": [model_name],
+            "mse": [mse_val],
+            "r2_score": [r2_score_val],
+        }
+    )
+
+    return metrics

@@ -27,7 +27,7 @@ class CatBoostReg:
         Model training.
 
         :param X_train: Training data.
-        :param y_train: Target valuese.
+        :param y_train: Target values.
         """
         self.model.fit(X_train, y_train)
         self.is_fitted = True

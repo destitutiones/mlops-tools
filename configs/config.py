@@ -22,6 +22,8 @@ class Model:
     name: str
     test_size: float
     inference_model: str
+    onnx_model_name: str
+    onnx_model_path: str
     params: Any
 
 
@@ -33,6 +35,9 @@ class CommonInfo:
     processed_data_path: str
     is_mlflow_logging: bool
     mlflow_uri: str
+    triton_path: str
+    triton_weights_path: str
+    triton_weights_target_path: str
 
 
 @dataclass

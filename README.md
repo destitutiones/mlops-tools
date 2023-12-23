@@ -33,11 +33,13 @@ poetry run python examples/hw1_usage.py
 #### #2
 
 ```
+python3 -m venv mlops_env
+source mlops_env/bin/activate
 poetry install
 pre-commit install
 pre-commit run -a
-python mlops_tools/train.py
-python mlops_tools/infer.py
+python3 mlops_tools/train.py
+python3 mlops_tools/infer.py
 ```
 
 #### #3
@@ -52,3 +54,23 @@ To run **hw2** you should:
 
 **Note:** In case you want to infer a specific saved model, mind the
 `inference_model` parameter.
+
+### HW3 example run
+
+1. First, run triton server:
+
+```bash
+cd nvidia_triton/
+docker-compose up
+```
+
+2. Simultaniously run `client.py`:
+
+```bash
+python3 -m venv mlops_env
+source mlops_env/bin/activate
+poetry install
+pre-commit install
+pre-commit run -a
+python3 nvidia_triton/client.py
+```

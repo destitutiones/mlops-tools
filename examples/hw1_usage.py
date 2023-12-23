@@ -13,7 +13,7 @@ from mlops_tools.models import LinReg  # noqa: E402
 
 def main():
     reg = LinReg("basic_lin_reg")
-    # Load the diabetes dataset
+    # Load the dataset
     diabetes_X, diabetes_y = datasets.load_diabetes(return_X_y=True)
 
     # Use only one feature
