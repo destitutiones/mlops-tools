@@ -16,3 +16,4 @@ common:
   is_mlflow_logging: False
   mlflow_uri: http://127.0.0.1:5000
   mlflow_models_path: ./mlflow_models/
+  triton_path: ./nvidia-triton/

@@ -39,6 +39,7 @@ def main(cfg: Params) -> None:
     model_params = cfg["model"]["params"]
     is_mlflow_logging = cfg["common"]["is_mlflow_logging"]
     mlflow_models_path = cfg["common"]["mlflow_models_path"]
+    triton_path = cfg["common"]["triton_path"]
     repo_url, sha = get_repo_params()
 
     reg = CatBoostReg(model_name, model_params)
@@ -54,6 +55,8 @@ def main(cfg: Params) -> None:
             # Train model & save it to disk
             reg.fit(X_train, y_train)
             mlflow_logging(reg, sha)
+            reg.model.save_model(fname=f"{triton_path}{model_name}.onnx", format="onnx")
+
             mlflow.catboost.save_model(
                 reg.model,
                 f"{mlflow_models_path}{model_name}/",

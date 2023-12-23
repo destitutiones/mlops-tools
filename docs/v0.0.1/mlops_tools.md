@@ -4,36 +4,34 @@
 
 ## mlops_tools.infer module
 
-### mlops_tools.infer.main()
+### mlops_tools.infer.main(cfg: Params)
 
 ## mlops_tools.models module
 
-### _class_ mlops_tools.models.LinReg(name: str)
+### _class_ mlops_tools.models.CatBoostReg(name: str, params: dict | None = None, model: CatBoostRegressor | None = None)
 
 Bases: `object`
 
-Linear Regression model implementation. Source:
-[https://scikit-learn.org/stable/auto_examples/linear_model/plot_ols.html](https://scikit-learn.org/stable/auto_examples/linear_model/plot_ols.html)
-(No one has told it should be at least a bit intellectual)
+CatBoost Regressor model implementation.
 
-#### calculate_metrics(X_test, y_test)
+#### calculate_metrics(X_test: DataFrame, y_test: DataFrame)
 
 Prediction and metrics calculation.
 
 - **Parameters:**
-  - **X_test** – Samples to predict values.
-  - **y_test** – Target values to evaluate model quality.
+  - **X_test** – Samples to predict values, pd.DataFrame.
+  - **y_test** – Target values to evaluate model quality, pd.DataFrame.
 - **Returns:** y_pred – model prediction, dict(‘model_name’, ‘mse’, ‘r2_score’)
 
-#### fit(X_train, y_train)
+#### fit(X_train: DataFrame, y_train: DataFrame)
 
 Model training.
 
 - **Parameters:**
   - **X_train** – Training data.
-  - **y_train** – Target values.
+  - **y_train** – Target valuese.
 
-#### plot_outputs(X_test, y_test, y_pred)
+#### plot_outputs(X_test: DataFrame, y_test: DataFrame, y_pred: DataFrame)
 
 Sample and prediction rendering.
 
@@ -44,26 +42,38 @@ Sample and prediction rendering.
 
 ## mlops_tools.train module
 
-### mlops_tools.train.main()
+### mlops_tools.train.main(cfg: Params)
+
+### mlops_tools.train.mlflow_logging(model: [CatBoostReg](#mlops_tools.models.CatBoostReg), sha: str)
+
+Write model hyperparameters and metrics to mlflow.
+
+- **Parameters:**
+  - **model** – model training
+  - **sha** – current git commit id
 
 ## mlops_tools.utils module
 
-### mlops_tools.utils.load_dataset(path: str = './')
+### mlops_tools.utils.get_repo_params()
+
+Get current repo url & current sha. :return: repo_url, sha
+
+### mlops_tools.utils.load_dataset(processed_data_path: str)
 
 Reads train & test datasets from path.
 
-- **Parameters:** **path** – path to saved train & test datasets in csv format
+- **Parameters:** **processed_data_path** – path to saved train & test datasets
+  in csv format
 - **Returns:** Datasets: X_train, X_test, y_train, y_test
 
-### mlops_tools.utils.prepare_dataset(test_size: float, path: str = './')
+### mlops_tools.utils.prepare_dataset(cfg: Params, repo_url: str)
 
 Saves train & test data from sklearn diabetes dataset by mentioned path in csv
 format.
 
 - **Parameters:**
-  - **test_size** – should be between 0.0 and 1.0 and represent the proportion
-    of the dataset to include in the test split
-  - **path** – path to save train & test data
+  - **cfg** – Params config from train run
+  - **repo_url** – url to the current repository linked to dvc
 - **Returns:**
 
 ## Module contents
